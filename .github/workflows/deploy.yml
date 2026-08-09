@@ -1,0 +1,57 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          script: |
+            set -e
+            APP_DIR="${{ secrets.SERVER_APP_DIR || '/var/www/lingobridge-website' }}"
+
+            # Ensure directory exists
+            if [ ! -d "$APP_DIR" ]; then
+              echo "Directory $APP_DIR does not exist. Setting up repository..."
+              sudo mkdir -p "$APP_DIR"
+              sudo chown -R $USER:$USER "$APP_DIR"
+              git clone https://github.com/digi000/lingobridge-website.git "$APP_DIR"
+            fi
+
+            cd "$APP_DIR"
+
+            echo "Pulling latest changes..."
+            git reset --hard
+            git pull origin main
+
+            echo "Installing dependencies..."
+            npm ci
+
+            echo "Building application..."
+            npm run build
+
+            echo "Restarting application with PM2..."
+            if pm2 describe lingobridge > /dev/null 2>&1; then
+              pm2 reload lingobridge --update-env
+            else
+              pm2 start npm --name "lingobridge" -- start -- -p 3000
+            fi
+
+            pm2 save
+            echo "Deployment completed successfully!"
