@@ -4,14 +4,14 @@ export default function About() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-16">
-        
+
         {/* Header/Hero Section */}
         <section className="text-center max-w-3xl mx-auto space-y-4">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-blue-900 bg-blue-50">
             Who We Are
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-blue-950 leading-tight">
-            Connecting Communities Across Alberta
+            Connecting Communities Across Alberta and Beyond
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed">
             LingoBridge provides professional interpretation and translation services that help people and organizations communicate clearly, accurately, and confidently.
@@ -35,7 +35,7 @@ export default function About() {
                 <p className="text-xs text-slate-400">Certified language coordinators & interpreters</p>
               </div>
             </div>
-            
+
             <p className="text-slate-600 text-sm leading-relaxed">
               Founded on the belief that communication is a fundamental right, LingoBridge acts as a vital link between service providers and individuals with limited English proficiency. We specialize in providing specialized, culturally competent language professionals for critical sectors including clinical environments, legal proceedings, public government offices, and local community service centers.
             </p>
