@@ -6,12 +6,62 @@ import Link from 'next/link';
 
 export default function Careers() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Form Fields
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [primaryLanguage, setPrimaryLanguage] = useState("");
+  const [otherLanguages, setOtherLanguages] = useState("");
+  const [experience, setExperience] = useState("1");
+  const [certifications, setCertifications] = useState<string[]>([]);
+  const [summary, setSummary] = useState("");
+
+  const handleCheckboxChange = (certName: string, checked: boolean) => {
+    if (checked) {
+      setCertifications((prev) => [...prev, certName]);
+    } else {
+      setCertifications((prev) => prev.filter((c) => c !== certName));
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, recruitment details would be saved or emailed here.
-    // TODO(security): Ensure form inputs and uploaded files are validated before processing.
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/careers", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          primaryLanguage,
+          otherLanguages,
+          experience,
+          certifications,
+          summary,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -152,6 +202,8 @@ export default function Careers() {
                   required
                   type="text"
                   placeholder="Jane Doe"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -165,6 +217,8 @@ export default function Careers() {
                   required
                   type="email"
                   placeholder="jane.doe@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -178,6 +232,8 @@ export default function Careers() {
                   required
                   type="tel"
                   placeholder="555-012-3456"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -191,6 +247,8 @@ export default function Careers() {
                   required
                   type="text"
                   placeholder="e.g. Swahili, Amharic"
+                  value={primaryLanguage}
+                  onChange={(e) => setPrimaryLanguage(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -203,6 +261,8 @@ export default function Careers() {
                 <input
                   type="text"
                   placeholder="e.g. Tigrinya, Oromo"
+                  value={otherLanguages}
+                  onChange={(e) => setOtherLanguages(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -214,6 +274,8 @@ export default function Careers() {
                 </label>
                 <select
                   required
+                  value={experience}
+                  onChange={(e) => setExperience(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white transition"
                 >
                   <option value="1">Less than 1 year</option>
@@ -231,19 +293,39 @@ export default function Careers() {
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-4 border border-slate-200 rounded-lg bg-slate-50/50">
                 <label className="flex items-center space-x-3 text-sm text-slate-700">
-                  <input type="checkbox" className="rounded text-blue-600 focus:ring-blue-500" />
+                  <input
+                    type="checkbox"
+                    checked={certifications.includes("CILI")}
+                    onChange={(e) => handleCheckboxChange("CILI", e.target.checked)}
+                    className="rounded text-blue-600 focus:ring-blue-500"
+                  />
                   <span>CILI (Certified Interpreter)</span>
                 </label>
                 <label className="flex items-center space-x-3 text-sm text-slate-700">
-                  <input type="checkbox" className="rounded text-blue-600 focus:ring-blue-500" />
+                  <input
+                    type="checkbox"
+                    checked={certifications.includes("Medical")}
+                    onChange={(e) => handleCheckboxChange("Medical", e.target.checked)}
+                    className="rounded text-blue-600 focus:ring-blue-500"
+                  />
                   <span>Medical Interpretation Certification</span>
                 </label>
                 <label className="flex items-center space-x-3 text-sm text-slate-700">
-                  <input type="checkbox" className="rounded text-blue-600 focus:ring-blue-500" />
+                  <input
+                    type="checkbox"
+                    checked={certifications.includes("Court")}
+                    onChange={(e) => handleCheckboxChange("Court", e.target.checked)}
+                    className="rounded text-blue-600 focus:ring-blue-500"
+                  />
                   <span>Court-Certified Interpreter</span>
                 </label>
                 <label className="flex items-center space-x-3 text-sm text-slate-700">
-                  <input type="checkbox" className="rounded text-blue-600 focus:ring-blue-500" />
+                  <input
+                    type="checkbox"
+                    checked={certifications.includes("ATIA")}
+                    onChange={(e) => handleCheckboxChange("ATIA", e.target.checked)}
+                    className="rounded text-blue-600 focus:ring-blue-500"
+                  />
                   <span>ATIA (Alberta Translators/Interpreters)</span>
                 </label>
               </div>
@@ -257,17 +339,26 @@ export default function Careers() {
               <textarea
                 rows={4}
                 placeholder="Briefly describe your translation/interpretation background, target dialects, and professional references..."
+                value={summary}
+                onChange={(e) => setSummary(e.target.value)}
                 className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
               ></textarea>
             </div>
+
+            {error && (
+              <div className="p-4 rounded-lg bg-red-50 text-red-700 text-sm border border-red-200">
+                {error}
+              </div>
+            )}
 
             {/* Submit Button */}
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white font-semibold py-4 rounded-lg hover:bg-blue-700 hover:shadow-md transition duration-200 text-center"
+                disabled={loading}
+                className="w-full bg-blue-600 text-white font-semibold py-4 rounded-lg hover:bg-blue-700 hover:shadow-md transition duration-200 text-center disabled:bg-blue-400 disabled:cursor-not-allowed"
               >
-                Submit Application
+                {loading ? "Submitting Application..." : "Submit Application"}
               </button>
             </div>
           </form>

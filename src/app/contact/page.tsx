@@ -6,12 +6,41 @@ import Link from 'next/link';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Form Fields
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, client query would be saved or emailed here.
-    // TODO(security): Ensure contact form inputs are validated before processing.
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, organization, message }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -147,6 +176,8 @@ export default function Contact() {
                     required
                     type="text"
                     placeholder="Jane Smith"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   />
                 </div>
@@ -160,6 +191,8 @@ export default function Contact() {
                     required
                     type="email"
                     placeholder="jane.smith@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   />
                 </div>
@@ -172,6 +205,8 @@ export default function Contact() {
                   <input
                     type="text"
                     placeholder="e.g. Community Health Clinic"
+                    value={organization}
+                    onChange={(e) => setOrganization(e.target.value)}
                     className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                   />
                 </div>
@@ -186,17 +221,26 @@ export default function Contact() {
                   required
                   rows={6}
                   placeholder="Tell us about your language requirements, dialect queries, or feedback..."
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 ></textarea>
               </div>
+
+              {error && (
+                <div className="p-4 rounded-lg bg-red-50 text-red-700 text-sm border border-red-200">
+                  {error}
+                </div>
+              )}
 
               {/* Submit Button */}
               <div>
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white font-semibold py-4 rounded-lg hover:bg-blue-700 hover:shadow-md transition duration-200 text-center"
+                  disabled={loading}
+                  className="w-full bg-blue-600 text-white font-semibold py-4 rounded-lg hover:bg-blue-700 hover:shadow-md transition duration-200 text-center disabled:bg-blue-400 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {loading ? "Sending Message..." : "Send Message"}
                 </button>
               </div>
             </form>

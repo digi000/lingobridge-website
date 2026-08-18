@@ -5,12 +5,60 @@ import Link from 'next/link';
 
 export default function RequestInterpreter() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Form Fields
+  const [organization, setOrganization] = useState("");
+  const [contactPerson, setContactPerson] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [languageRequired, setLanguageRequired] = useState("");
+  const [deliveryType, setDeliveryType] = useState("in-person");
+  const [date, setDate] = useState("");
+  const [duration, setDuration] = useState("");
+  const [location, setLocation] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [notes, setNotes] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, form data would be sent to the backend database here.
-    // TODO(security): Ensure form inputs are validated on the server side prior to database persistence.
-    setSubmitted(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          organization,
+          contactPerson,
+          email,
+          phone,
+          languageRequired,
+          deliveryType,
+          date,
+          duration,
+          location,
+          industry,
+          notes,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong. Please try again.");
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
@@ -106,6 +154,8 @@ export default function RequestInterpreter() {
                   required
                   type="text"
                   placeholder="e.g. Alberta Health Services"
+                  value={organization}
+                  onChange={(e) => setOrganization(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -119,6 +169,8 @@ export default function RequestInterpreter() {
                   required
                   type="text"
                   placeholder="Jane Smith"
+                  value={contactPerson}
+                  onChange={(e) => setContactPerson(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -132,6 +184,8 @@ export default function RequestInterpreter() {
                   required
                   type="email"
                   placeholder="jane.smith@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -145,6 +199,8 @@ export default function RequestInterpreter() {
                   required
                   type="tel"
                   placeholder="555-019-2834"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -158,6 +214,8 @@ export default function RequestInterpreter() {
                   required
                   type="text"
                   placeholder="e.g. Swahili, Tigrinya"
+                  value={languageRequired}
+                  onChange={(e) => setLanguageRequired(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -169,6 +227,8 @@ export default function RequestInterpreter() {
                 </label>
                 <select
                   required
+                  value={deliveryType}
+                  onChange={(e) => setDeliveryType(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white transition"
                 >
                   <option value="in-person">In-person (On-site)</option>
@@ -185,6 +245,8 @@ export default function RequestInterpreter() {
                 <input
                   required
                   type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -198,6 +260,8 @@ export default function RequestInterpreter() {
                   required
                   type="text"
                   placeholder="e.g. 10:00 AM MST - 2 hours"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -214,6 +278,8 @@ export default function RequestInterpreter() {
                   required
                   type="text"
                   placeholder="Full clinic address or meeting URL"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -227,6 +293,8 @@ export default function RequestInterpreter() {
                   required
                   type="text"
                   placeholder="e.g. Healthcare, Criminal Court"
+                  value={industry}
+                  onChange={(e) => setIndustry(e.target.value)}
                   className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -240,17 +308,26 @@ export default function RequestInterpreter() {
               <textarea
                 rows={4}
                 placeholder="List any dialect constraints, patient gender preferences, or specific background context..."
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
                 className="w-full border border-slate-200 rounded-lg p-3 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
               ></textarea>
             </div>
+
+            {error && (
+              <div className="p-4 rounded-lg bg-red-50 text-red-700 text-sm border border-red-200">
+                {error}
+              </div>
+            )}
 
             {/* Submit Button */}
             <div className="pt-4">
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white font-semibold py-4 rounded-lg hover:bg-blue-700 hover:shadow-md transition duration-200 text-center"
+                disabled={loading}
+                className="w-full bg-blue-600 text-white font-semibold py-4 rounded-lg hover:bg-blue-700 hover:shadow-md transition duration-200 text-center disabled:bg-blue-400 disabled:cursor-not-allowed"
               >
-                Submit Interpreter Request
+                {loading ? "Submitting Request..." : "Submit Interpreter Request"}
               </button>
             </div>
           </form>
