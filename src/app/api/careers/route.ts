@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendNotificationEmail } from "@/lib/ses";
+import { sendNotificationEmail } from "@/lib/email";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Simple phone verification (allowing spaces, hyphens, parentheses, and digits)

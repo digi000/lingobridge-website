@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendNotificationEmail } from "@/lib/ses";
+import { sendNotificationEmail } from "@/lib/email";
 
 // Simple validation regexes
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
