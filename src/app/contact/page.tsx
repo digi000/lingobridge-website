@@ -25,7 +25,7 @@ export default function Contact() {
           </div>
           <h1 className="text-2xl font-bold text-blue-950">Message Sent</h1>
           <p className="text-sm text-slate-600 leading-relaxed">
-            Thank you for contacting LingoBridge. Your message has been routed to our language coordination desk. One of our support representatives will get in touch with you shortly.
+            Thank you for contacting Lingora. Your message has been routed to our language coordination desk. One of our support representatives will get in touch with you shortly.
           </p>
           <div className="pt-4">
             <Link
@@ -77,7 +77,7 @@ export default function Contact() {
                     General inquiries & coordinating requests:
                   </p>
                   <p className="text-sm font-semibold text-blue-600 mt-0.5">
-                    info@lingobridge.ca
+                    info@lingora.ca
                   </p>
                 </div>
               </div>
@@ -122,7 +122,7 @@ export default function Contact() {
             <div className="relative w-full h-[280px] rounded-2xl overflow-hidden border border-slate-100 shadow-md">
               <Image
                 src="/contact_support.png"
-                alt="LingoBridge customer support coordinator wearing a headset at a desk in a bright office environment"
+                alt="Lingora customer support coordinator wearing a headset at a desk in a bright office environment"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 35vw"

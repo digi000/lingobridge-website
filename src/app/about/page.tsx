@@ -14,7 +14,7 @@ export default function About() {
             Connecting Communities Across Alberta and Beyond
           </h1>
           <p className="text-lg text-slate-600 leading-relaxed">
-            LingoBridge provides professional interpretation and translation services that help people and organizations communicate clearly, accurately, and confidently.
+            Lingora provides professional interpretation and translation services that help people and organizations communicate clearly, accurately, and confidently.
           </p>
         </section>
 
@@ -25,19 +25,19 @@ export default function About() {
             <div className="flex items-center space-x-4">
               <Image
                 src="/logo-icon.png"
-                alt="LingoBridge Icon"
+                alt="Lingora Icon"
                 width={60}
                 height={60}
                 className="rounded-xl bg-slate-50 p-1 object-contain border border-slate-100"
               />
               <div>
-                <h2 className="text-xl font-bold text-blue-950">LingoBridge Standards</h2>
+                <h2 className="text-xl font-bold text-blue-950">Lingora Standards</h2>
                 <p className="text-xs text-slate-400">Certified language coordinators & interpreters</p>
               </div>
             </div>
 
             <p className="text-slate-600 text-sm leading-relaxed">
-              Founded on the belief that communication is a fundamental right, LingoBridge acts as a vital link between service providers and individuals with limited English proficiency. We specialize in providing specialized, culturally competent language professionals for critical sectors including clinical environments, legal proceedings, public government offices, and local community service centers.
+              Founded on the belief that communication is a fundamental right, Lingora acts as a vital link between service providers and individuals with limited English proficiency. We specialize in providing specialized, culturally competent language professionals for critical sectors including clinical environments, legal proceedings, public government offices, and local community service centers.
             </p>
             <p className="text-slate-600 text-sm leading-relaxed">
               Our coordinators operate diligently to align each client assignment with interpreters who possess appropriate industry certifications and dialect matching, ensuring confidentiality, extreme compliance, and accurate context delivery on every project.
@@ -48,7 +48,7 @@ export default function About() {
           <div className="lg:col-span-5 relative w-full h-[300px] sm:h-[400px] rounded-xl overflow-hidden border border-slate-100 shadow-md">
             <Image
               src="/about_team.png"
-              alt="LingoBridge language service coordinators review client translation requests"
+              alt="Lingora language service coordinators review client translation requests"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 35vw"
@@ -84,7 +84,7 @@ export default function About() {
               </div>
               <h2 className="text-2xl font-bold text-blue-950 mb-3">Our Vision</h2>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Become one of Canada's most trusted, responsive language service providers, recognized for absolute precision and outstanding community integration.
+                Become one of Canada&apos;s most trusted, responsive language service providers, recognized for absolute precision and outstanding community integration.
               </p>
             </div>
           </div>

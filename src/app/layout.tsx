@@ -3,7 +3,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'LingoBridge | Interpretation & Translation',
+  title: 'Lingora | Interpretation & Translation',
   description: 'Professional Interpretation and Translation Services Across Alberta and Beyond.',
   icons: {
     icon: '/favicon.jpg',

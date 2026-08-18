@@ -92,7 +92,7 @@ export default function Services() {
           <div className="lg:col-span-5 relative w-full h-[320px] sm:h-[450px] rounded-xl overflow-hidden border border-slate-100 shadow-md">
             <Image
               src="/services_interpreter.png"
-              alt="LingoBridge professional remote telephone interpreter with headset working in office environment"
+              alt="Lingora professional remote telephone interpreter with headset working in office environment"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 35vw"

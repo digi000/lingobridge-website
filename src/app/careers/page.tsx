@@ -25,7 +25,7 @@ export default function Careers() {
           </div>
           <h1 className="text-2xl font-bold text-blue-950">Application Received</h1>
           <p className="text-sm text-slate-600 leading-relaxed">
-            Thank you for applying to join the LingoBridge interpreter network. Our recruitment team reviews credentials weekly. If your language profile matches our active requirements, we will contact you directly to conduct screening.
+            Thank you for applying to join the Lingora interpreter network. Our recruitment team reviews credentials weekly. If your language profile matches our active requirements, we will contact you directly to conduct screening.
           </p>
           <div className="pt-4">
             <Link
@@ -63,7 +63,7 @@ export default function Careers() {
           <div className="lg:col-span-7 space-y-6">
             <h2 className="text-2xl font-bold text-blue-950">Qualifications We Look For</h2>
             <p className="text-slate-600 text-sm leading-relaxed">
-              LingoBridge maintains strict compliance standards to meet the expectations of our healthcare, judicial, and public sector clients. We look for language professionals who exhibit:
+              Lingora maintains strict compliance standards to meet the expectations of our healthcare, judicial, and public sector clients. We look for language professionals who exhibit:
             </p>
             <ul className="space-y-3 text-slate-600 text-sm list-disc list-inside">
               <li>Recognized interpretation/translation certifications (e.g. CILI, court credentials, medical training).</li>
@@ -80,7 +80,7 @@ export default function Careers() {
           <div className="lg:col-span-5 relative w-full h-[320px] sm:h-[420px] rounded-2xl overflow-hidden border border-slate-100 shadow-md">
             <Image
               src="/careers_interpreter.png"
-              alt="LingoBridge professional interpreter smiling and holding a portfolio in a bright office environment"
+              alt="Lingora professional interpreter smiling and holding a portfolio in a bright office environment"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 35vw"
@@ -91,7 +91,7 @@ export default function Careers() {
         {/* Benefits Grid */}
         <section className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-12 shadow-sm space-y-8">
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-bold text-blue-950">Why Partner with LingoBridge?</h2>
+            <h2 className="text-2xl font-bold text-blue-950">Why Partner with Lingora?</h2>
             <p className="mt-2 text-sm text-slate-500">
               We value our language network and strive to build collaborative, supportive contractor relationships.
             </p>

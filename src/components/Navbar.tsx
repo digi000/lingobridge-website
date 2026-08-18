@@ -16,7 +16,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center">
               <Image
                 src="/large-logo.png"
-                alt="LingoBridge Logo"
+                alt="Lingora Logo"
                 width={250}
                 height={80}
                 className="object-contain w-[180px] sm:w-[220px] md:w-[250px] h-auto transition-transform duration-300 hover:scale-[1.02]"

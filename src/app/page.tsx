@@ -38,7 +38,7 @@ export default function Home() {
           <div className="lg:col-span-5 relative w-full h-[320px] sm:h-[450px] rounded-2xl overflow-hidden border border-slate-100 shadow-lg">
             <Image
               src="/interpreter_hero.png"
-              alt="LingoBridge professional medical interpreter speaking with a patient and a clinician"
+              alt="Lingora professional medical interpreter speaking with a patient and a clinician"
               fill
               className="object-cover"
               priority
@@ -82,7 +82,7 @@ export default function Home() {
               Professional Language Solutions
             </h2>
             <p className="mt-4 text-lg text-slate-500">
-              We offer certified and reliable interpretation and translation solutions tailored to your organization's compliance and operational requirements.
+              We offer certified and reliable interpretation and translation solutions tailored to your organization&apos;s compliance and operational requirements.
             </p>
           </div>
 
@@ -117,7 +117,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-bold text-blue-950 mb-3">Telephone & Virtual Interpretation</h3>
                 <p className="text-slate-600 leading-relaxed text-sm">
-                  Instant phone or secure high-definition video connections, enabling your staff to easily communicate with non-English speakers at a moment's notice.
+                  Instant phone or secure high-definition video connections, enabling your staff to easily communicate with non-English speakers at a moment&apos;s notice.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-slate-100">
