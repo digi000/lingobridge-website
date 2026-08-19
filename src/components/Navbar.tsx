@@ -19,7 +19,7 @@ export default function Navbar() {
                 alt="Lingora Logo"
                 width={350}
                 height={112}
-                className="object-contain w-[240px] sm:w-[280px] md:w-[320px] h-auto transition-transform duration-300 hover:scale-[1.02]"
+                className="object-contain h-16 md:h-20 w-auto transition-transform duration-300 hover:scale-[1.02]"
               />
             </Link>
           </div>
