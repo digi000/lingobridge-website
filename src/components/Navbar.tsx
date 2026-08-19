@@ -15,7 +15,7 @@ export default function Navbar() {
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
               <Image
-                src="/large-logo.png"
+                src="/large-logo.png?v=2"
                 alt="Lingora Logo"
                 width={250}
                 height={80}
