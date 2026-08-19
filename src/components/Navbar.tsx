@@ -9,7 +9,7 @@ export default function Navbar() {
   return (
     <nav className="relative bg-white shadow-sm border-b border-slate-100 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
@@ -17,9 +17,9 @@ export default function Navbar() {
               <img
                 src="/large-logo.png?v=2"
                 alt="Lingora Logo"
-                width={250}
-                height={80}
-                className="object-contain w-[180px] sm:w-[220px] md:w-[250px] h-auto transition-transform duration-300 hover:scale-[1.02]"
+                width={350}
+                height={112}
+                className="object-contain w-[240px] sm:w-[280px] md:w-[320px] h-auto transition-transform duration-300 hover:scale-[1.02]"
               />
             </Link>
           </div>
@@ -73,7 +73,7 @@ export default function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       <div
-        className={`md:hidden absolute top-20 left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-lg transition-all duration-300 ease-in-out ${
+        className={`md:hidden absolute top-24 left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-lg transition-all duration-300 ease-in-out ${
           isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
         }`}
       >
