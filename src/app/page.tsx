@@ -53,22 +53,22 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:divide-x md:divide-slate-200">
             <div className="text-center md:text-left md:px-8 first:pl-0">
-              <span className="block text-3xl font-extrabold text-blue-950">50+</span>
-              <span className="block text-sm font-semibold text-slate-500 uppercase tracking-wide mt-1">
+              <span className="block text-3xl font-extrabold text-blue-950">Multiple Languages Supported</span>
+              {/*<span className="block text-sm font-semibold text-slate-500 uppercase tracking-wide mt-1">
                 Languages Supported
-              </span>
+              </span>*/}
             </div>
             <div className="text-center md:px-8">
-              <span className="block text-3xl font-extrabold text-blue-950">99.8%</span>
-              <span className="block text-sm font-semibold text-slate-500 uppercase tracking-wide mt-1">
+              <span className="block text-3xl font-extrabold text-blue-950">Professional & Confidential</span>
+              {/*<span className="block text-sm font-semibold text-slate-500 uppercase tracking-wide mt-1">
                 Certified Accuracy
-              </span>
+              </span>*/}
             </div>
             <div className="text-center md:text-right md:px-8 last:pr-0">
-              <span className="block text-3xl font-extrabold text-blue-950">24/7</span>
-              <span className="block text-sm font-semibold text-slate-500 uppercase tracking-wide mt-1">
+              <span className="block text-3xl font-extrabold text-blue-950">Flexible Scheduling</span>
+              {/*<span className="block text-sm font-semibold text-slate-500 uppercase tracking-wide mt-1">
                 Rapid On-Demand Scheduling
-              </span>
+              </span>*/}
             </div>
           </div>
         </div>
