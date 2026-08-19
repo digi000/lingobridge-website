@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Navbar() {
@@ -14,13 +13,13 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="flex items-center">
-              <Image
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/large-logo.png?v=2"
                 alt="Lingora Logo"
                 width={250}
                 height={80}
                 className="object-contain w-[180px] sm:w-[220px] md:w-[250px] h-auto transition-transform duration-300 hover:scale-[1.02]"
-                priority
               />
             </Link>
           </div>
