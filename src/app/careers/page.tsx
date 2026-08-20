@@ -19,6 +19,10 @@ export default function Careers() {
   const [certifications, setCertifications] = useState<string[]>([]);
   const [summary, setSummary] = useState("");
 
+  // File Upload Fields
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [certificateFiles, setCertificateFiles] = useState<File[]>([]);
+
   const handleCheckboxChange = (certName: string, checked: boolean) => {
     if (checked) {
       setCertifications((prev) => [...prev, certName]);
@@ -27,27 +31,76 @@ export default function Careers() {
     }
   };
 
+  const handleResumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Resume file size exceeds the 5MB limit.");
+        e.target.value = "";
+        setResumeFile(null);
+        return;
+      }
+      setResumeFile(file);
+    } else {
+      setResumeFile(null);
+    }
+  };
+
+  const handleCertificatesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const fileArray = Array.from(files);
+      let sizeSum = 0;
+      for (const file of fileArray) {
+        if (file.size > 5 * 1024 * 1024) {
+          alert(`File ${file.name} exceeds the 5MB size limit.`);
+          e.target.value = "";
+          setCertificateFiles([]);
+          return;
+        }
+        sizeSum += file.size;
+      }
+      if (sizeSum > 10 * 1024 * 1024) {
+        alert("Total supporting documents size exceeds the 10MB limit.");
+        e.target.value = "";
+        setCertificateFiles([]);
+        return;
+      }
+      setCertificateFiles(fileArray);
+    } else {
+      setCertificateFiles([]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!resumeFile) {
+      setError("Please upload your resume.");
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
     try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("primaryLanguage", primaryLanguage);
+      formData.append("otherLanguages", otherLanguages);
+      formData.append("experience", experience);
+      formData.append("certifications", JSON.stringify(certifications));
+      formData.append("summary", summary);
+      formData.append("resume", resumeFile);
+      
+      certificateFiles.forEach((file) => {
+        formData.append("certificates", file);
+      });
+
       const response = await fetch("/api/careers", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          primaryLanguage,
-          otherLanguages,
-          experience,
-          certifications,
-          summary,
-        }),
+        body: formData,
       });
 
       const data = await response.json();
@@ -328,6 +381,43 @@ export default function Careers() {
                   />
                   <span>ATIA (Alberta Translators/Interpreters)</span>
                 </label>
+              </div>
+            </div>
+
+            {/* File Upload Section */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Resume File Input */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
+                  Upload Resume (Required)
+                </label>
+                <input
+                  required
+                  type="file"
+                  accept=".pdf,.doc,.docx,image/png,image/jpeg"
+                  onChange={handleResumeChange}
+                  className="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white transition file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+                <span className="text-[10px] text-slate-450 block mt-1 leading-normal">
+                  Allowed formats: PDF, DOC, DOCX, PNG, JPG (Max 5MB)
+                </span>
+              </div>
+
+              {/* Certificates File Input */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wide mb-1">
+                  Certificates & Supporting Documents (Optional)
+                </label>
+                <input
+                  type="file"
+                  multiple
+                  accept=".pdf,.doc,.docx,image/png,image/jpeg"
+                  onChange={handleCertificatesChange}
+                  className="w-full border border-slate-200 rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white transition file:mr-4 file:py-1 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                />
+                <span className="text-[10px] text-slate-450 block mt-1 leading-normal">
+                  Upload multiple certificates (Max 5MB each, 10MB total)
+                </span>
               </div>
             </div>
 
