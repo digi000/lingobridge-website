@@ -93,7 +93,7 @@ export default function Careers() {
       formData.append("certifications", JSON.stringify(certifications));
       formData.append("summary", summary);
       formData.append("resume", resumeFile);
-      
+
       certificateFiles.forEach((file) => {
         formData.append("certificates", file);
       });
@@ -146,7 +146,7 @@ export default function Careers() {
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-16">
-        
+
         {/* Page Header */}
         <section className="text-center max-w-3xl mx-auto space-y-4">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider text-blue-900 bg-blue-50">
@@ -199,7 +199,7 @@ export default function Careers() {
               We value our language network and strive to build collaborative, supportive contractor relationships.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="space-y-3">
               <div className="h-10 w-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
@@ -352,7 +352,7 @@ export default function Careers() {
                     onChange={(e) => handleCheckboxChange("CILI", e.target.checked)}
                     className="rounded text-blue-600 focus:ring-blue-500"
                   />
-                  <span>CILI (Certified Interpreter)</span>
+                  <span>CILISAT or CILI (Certified Interpreter)</span>
                 </label>
                 <label className="flex items-center space-x-3 text-sm text-slate-700">
                   <input
