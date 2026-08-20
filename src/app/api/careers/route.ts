@@ -7,10 +7,26 @@ const PHONE_REGEX = /^[\d\s()+-]{7,25}$/;
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const { name, email, phone, primaryLanguage, otherLanguages, experience, certifications, summary } = body;
+    const formData = await request.formData();
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+    const primaryLanguage = formData.get("primaryLanguage") as string;
+    const otherLanguages = formData.get("otherLanguages") as string;
+    const experience = formData.get("experience") as string;
+    const certificationsJson = formData.get("certifications") as string;
+    const summary = formData.get("summary") as string;
 
-    // 1. Input Validation
+    let certifications: string[] = [];
+    if (certificationsJson) {
+      try {
+        certifications = JSON.parse(certificationsJson);
+      } catch (e) {
+        return NextResponse.json({ error: "Invalid certifications format" }, { status: 400 });
+      }
+    }
+
+    // 1. Text Input Validation
     if (!name || typeof name !== "string" || name.trim().length === 0 || name.length > 100) {
       return NextResponse.json({ error: "Invalid name (must be 1-100 characters)" }, { status: 400 });
     }
@@ -43,6 +59,84 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid professional summary (max 2000 characters)" }, { status: 400 });
     }
 
+    // 2. File Upload Extraction & Validation
+    const resumeEntry = formData.get("resume");
+    const certEntries = formData.getAll("certificates");
+
+    const attachments: { filename: string; content: Buffer; contentType: string }[] = [];
+    let totalSize = 0;
+
+    const allowedMimeTypes = [
+      "application/pdf",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/msword",
+      "image/png",
+      "image/jpeg",
+    ];
+
+    const processFile = async (file: FormDataEntryValue, isRequired = false) => {
+      if (!file || !(file instanceof File)) {
+        if (isRequired) {
+          throw new Error("Resume file is required");
+        }
+        return null;
+      }
+
+      // Check empty upload files
+      if (file.size === 0) {
+        if (isRequired) {
+          throw new Error("Uploaded resume is empty");
+        }
+        return null;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        throw new Error(`File ${file.name} exceeds the 5MB size limit.`);
+      }
+
+      if (!allowedMimeTypes.includes(file.type)) {
+        throw new Error(`File ${file.name} has an invalid format. Only PDF, Word documents, PNG, and JPEG are allowed.`);
+      }
+
+      totalSize += file.size;
+      if (totalSize > 15 * 1024 * 1024) {
+        throw new Error("Total upload size exceeds the 15MB limit.");
+      }
+
+      const buffer = Buffer.from(await file.arrayBuffer());
+      return {
+        filename: file.name,
+        content: buffer,
+        contentType: file.type,
+      };
+    };
+
+    // Extract resume (Required)
+    if (!resumeEntry) {
+      return NextResponse.json({ error: "Resume file is required" }, { status: 400 });
+    }
+
+    try {
+      const resumeAttachment = await processFile(resumeEntry, true);
+      if (resumeAttachment) {
+        attachments.push(resumeAttachment);
+      }
+    } catch (err: any) {
+      return NextResponse.json({ error: err.message }, { status: 400 });
+    }
+
+    // Extract other supporting documents (Optional)
+    for (const certEntry of certEntries) {
+      try {
+        const certAttachment = await processFile(certEntry, false);
+        if (certAttachment) {
+          attachments.push(certAttachment);
+        }
+      } catch (err: any) {
+        return NextResponse.json({ error: err.message }, { status: 400 });
+      }
+    }
+
     // Map experience values to user-friendly labels
     const experienceLabels: Record<string, string> = {
       "1": "Less than 1 year",
@@ -52,7 +146,7 @@ export async function POST(request: Request) {
     };
     const experienceLabel = experienceLabels[experience] || experience;
 
-    // 2. Email Formatting
+    // 3. Email Formatting
     const subject = `[Lingora Careers] New Application from ${name.trim()}`;
     const textBody = `
 New Interpreter Application:
@@ -64,6 +158,7 @@ Primary Working Language: ${primaryLanguage.trim()}
 Other Working Languages: ${otherLanguages ? otherLanguages.trim() : "None"}
 Years of Experience: ${experienceLabel}
 Certifications: ${certifications.length > 0 ? certifications.join(", ") : "None declared"}
+Attached Files: ${attachments.map(a => a.filename).join(", ")}
 Summary:
 ${summary ? summary.trim() : "N/A"}
     `;
@@ -100,15 +195,19 @@ ${summary ? summary.trim() : "N/A"}
           <td style="padding: 8px; border: 1px solid #ddd;">${certifications.length > 0 ? certifications.join(", ") : "None declared"}</td>
         </tr>
         <tr>
+          <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Attached Files</td>
+          <td style="padding: 8px; border: 1px solid #ddd;">${attachments.length > 0 ? attachments.map(a => a.filename).join(", ") : "None"}</td>
+        </tr>
+        <tr>
           <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold; vertical-align: top;">Professional Summary</td>
           <td style="padding: 8px; border: 1px solid #ddd; white-space: pre-wrap;">${summary ? summary.trim() : "N/A"}</td>
         </tr>
       </table>
     `;
 
-    // 3. Send Email
+    // 4. Send Email
     // TODO(security): Implement IP-based rate limiting on this API route for production deployments.
-    await sendNotificationEmail({ subject, htmlBody, textBody });
+    await sendNotificationEmail({ subject, htmlBody, textBody, attachments });
 
     return NextResponse.json({ success: true });
   } catch (error) {
