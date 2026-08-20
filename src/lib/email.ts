@@ -25,16 +25,24 @@ function getTransporter(): nodemailer.Transporter {
   return transporter;
 }
 
+interface Attachment {
+  filename: string;
+  content: Buffer;
+  contentType: string;
+}
+
 interface SendEmailParams {
   subject: string;
   htmlBody: string;
   textBody: string;
+  attachments?: Attachment[];
 }
 
 export async function sendNotificationEmail({
   subject,
   htmlBody,
   textBody,
+  attachments,
 }: SendEmailParams): Promise<void> {
   const activeTransporter = getTransporter();
   const senderEmail = process.env.SMTP_USER;
@@ -50,5 +58,10 @@ export async function sendNotificationEmail({
     subject,
     text: textBody,
     html: htmlBody,
+    attachments: attachments?.map((att) => ({
+      filename: att.filename,
+      content: att.content,
+      contentType: att.contentType,
+    })),
   });
 }
