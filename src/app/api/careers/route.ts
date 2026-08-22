@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     if (certificationsJson) {
       try {
         certifications = JSON.parse(certificationsJson);
-      } catch (e) {
+      } catch {
         return NextResponse.json({ error: "Invalid certifications format" }, { status: 400 });
       }
     }
@@ -121,8 +121,9 @@ export async function POST(request: Request) {
       if (resumeAttachment) {
         attachments.push(resumeAttachment);
       }
-    } catch (err: any) {
-      return NextResponse.json({ error: err.message }, { status: 400 });
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : "Invalid resume file parameter";
+      return NextResponse.json({ error: errMsg }, { status: 400 });
     }
 
     // Extract other supporting documents (Optional)
@@ -132,8 +133,9 @@ export async function POST(request: Request) {
         if (certAttachment) {
           attachments.push(certAttachment);
         }
-      } catch (err: any) {
-        return NextResponse.json({ error: err.message }, { status: 400 });
+      } catch (err) {
+        const errMsg = err instanceof Error ? err.message : "Invalid document file parameter";
+        return NextResponse.json({ error: errMsg }, { status: 400 });
       }
     }
 

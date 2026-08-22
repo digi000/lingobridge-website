@@ -195,66 +195,183 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Industries & Core Languages Section */}
-      <section className="bg-white py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Industries */}
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-extrabold text-blue-950 mb-6">
+      {/* Sectors We Serve Section */}
+      <section className="bg-slate-50 py-16 lg:py-24 px-4 sm:px-6 lg:px-8 border-t border-b border-slate-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl font-extrabold text-[#0B1B3D] sm:text-4xl">
               Sectors We Serve
             </h2>
-            <p className="text-slate-600 mb-8 text-sm leading-relaxed">
+            <p className="mt-4 text-slate-600 text-base leading-relaxed">
               Different industries demand different vocabularies and compliance. We provide specialized interpreters well-versed in industry-specific terminologies and standards:
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center space-x-3 p-4 border border-slate-100 rounded-lg bg-slate-50/50">
-                <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex items-center space-x-4 p-5 border border-slate-200/60 rounded-xl bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition duration-200">
+              <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
-                <span className="text-sm font-bold text-blue-950">Healthcare & Clinical</span>
               </div>
-              <div className="flex items-center space-x-3 p-4 border border-slate-100 rounded-lg bg-slate-50/50">
-                <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              <span className="text-base font-bold text-slate-800">Healthcare & Clinical</span>
+            </div>
+            <div className="flex items-center space-x-4 p-5 border border-slate-200/60 rounded-xl bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition duration-200">
+              <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
                 </svg>
-                <span className="text-sm font-bold text-blue-950">Legal & Judicial</span>
               </div>
-              <div className="flex items-center space-x-3 p-4 border border-slate-100 rounded-lg bg-slate-50/50">
-                <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              <span className="text-base font-bold text-slate-800">Legal & Judicial</span>
+            </div>
+            <div className="flex items-center space-x-4 p-5 border border-slate-200/60 rounded-xl bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition duration-200">
+              <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
-                <span className="text-sm font-bold text-blue-950">Government & Public Offices</span>
               </div>
-              <div className="flex items-center space-x-3 p-4 border border-slate-100 rounded-lg bg-slate-50/50">
-                <svg className="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              <span className="text-base font-bold text-slate-800">Government & Public Offices</span>
+            </div>
+            <div className="flex items-center space-x-4 p-5 border border-slate-200/60 rounded-xl bg-white shadow-sm hover:shadow-md hover:border-slate-300 transition duration-200">
+              <div className="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                <span className="text-sm font-bold text-blue-950">Education & Non-Profits</span>
               </div>
+              <span className="text-base font-bold text-slate-800">Education & Non-Profits</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Languages We Support Section */}
+      <section className="bg-white py-16 lg:py-24 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <div>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-[#0B1B3D] tracking-tight mb-4">
+              Languages We Support
+            </h2>
+            <p className="text-slate-650 text-base leading-relaxed max-w-3xl">
+              We provide interpreting and translation services in a wide range of languages to support diverse communities in Alberta and beyond. Our supported languages include:
+            </p>
+          </div>
+
+          {/* Languages Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {/* Row 1 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Tigrinya
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Amharic
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Arabic
+            </div>
+            {/* Spacer to force next items to the second row on desktop */}
+            <div className="hidden md:block" />
+
+            {/* Row 2 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Swahili
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Oromo
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Somali
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Tigre
+            </div>
+
+            {/* Row 3 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Bilen
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              French
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Spanish
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Kurdish
+            </div>
+
+            {/* Row 4 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Dari
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Pashto
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Urdu
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Russian
+            </div>
+
+            {/* Row 5 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Mandarin
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Cantonese
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Vietnamese
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Punjabi
+            </div>
+
+            {/* Row 6 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Tagalog
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Nepali
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Korean
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Japanese
+            </div>
+
+            {/* Row 7 */}
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Polish
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px]">
+              Portuguese
+            </div>
+            <div className="bg-white border border-slate-200/60 shadow-sm rounded-xl py-3.5 px-4 text-center font-bold text-[#0B1B3D] text-base hover:border-slate-350 hover:shadow-md transition duration-200 flex items-center justify-center min-h-[58px] col-span-2">
+              And many others
             </div>
           </div>
 
-          {/* Languages */}
-          <div>
-            <h2 className="text-2xl lg:text-3xl font-extrabold text-blue-950 mb-6">
-              Languages We Support
-            </h2>
-            <p className="text-slate-600 mb-8 text-sm leading-relaxed">
-              We specialize in primary languages spoken across East Africa, Arab-speaking communities, and global populations residing in Alberta. Our main supported languages include:
+          <div className="space-y-4 pt-4">
+            <p className="text-slate-600 text-base leading-relaxed">
+              Looking for a language not listed above?<br />
+              <span className="text-slate-500 text-sm">Additional languages may be available upon request.</span>
             </p>
-            <div className="flex flex-wrap gap-3">
-              {['Tigrinya', 'Amharic', 'Arabic', 'Swahili', 'Oromo', 'Somali', 'Tigre', 'Bilen'].map((lang) => (
-                <span
-                  key={lang}
-                  className="px-4 py-2 border border-slate-200 bg-white rounded-lg text-sm font-semibold text-slate-700 hover:border-blue-300 transition"
-                >
-                  {lang}
-                </span>
-              ))}
-            </div>
-            <p className="text-xs text-slate-400 italic mt-6">
-              Additional dialects and languages are available upon request. Contact us to verify support for specific region codes.
-            </p>
+
+            <Link
+              href="/contact"
+              className="inline-flex items-center bg-[#0B1B3D] hover:bg-blue-900 text-white font-semibold px-6 py-3.5 rounded-lg transition duration-200"
+            >
+              <svg className="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.6 9h16.8M3.6 15h16.8M12 3a9.9 9.9 0 00-3.3 9 9.9 9.9 0 003.3 9M12 3a9.9 9.9 0 013.3 9 9.9 9.9 0 01-3.3 9" />
+              </svg>
+              <span>Request the Language You Need</span>
+              <svg className="h-4 w-4 ml-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
