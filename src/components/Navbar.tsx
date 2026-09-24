@@ -26,6 +26,9 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-6 text-blue-900 font-medium">
+            <Link href="/" className="hover:text-blue-600 transition-colors duration-200 py-2">
+              Home
+            </Link>
             <Link href="/about" className="hover:text-blue-600 transition-colors duration-200 py-2">
               About Us
             </Link>
@@ -73,9 +76,8 @@ export default function Navbar() {
 
       {/* Mobile Navigation Drawer */}
       <div
-        className={`md:hidden absolute top-24 left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-lg transition-all duration-300 ease-in-out ${
-          isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
-        }`}
+        className={`md:hidden absolute top-24 left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-lg transition-all duration-300 ease-in-out ${isOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+          }`}
       >
         <div className="px-4 pt-2 pb-6 space-y-3">
           <Link
